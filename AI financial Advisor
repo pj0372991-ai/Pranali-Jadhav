@@ -1,0 +1,91 @@
+import streamlit as st
+import numpy as np
+
+st.title("AI Financial Advisor")
+
+income = st.number_input("Income")
+expenses = st.number_input("Expenses")
+
+if st.button("Calculate"):
+    savings = np.array([income]) - np.array([expenses])
+    st.write("Savings:", savings[0])
+    
+    
+    
+import pandas as pd
+
+with st.form("form2"):
+    income = st.number_input("Income")
+    expenses = st.number_input("Expenses")
+    submit = st.form_submit_button("Submit")
+
+if submit:
+    data = {"Income":[income], "Expenses":[expenses]}
+    df = pd.DataFrame(data)
+    df["Savings"] = df["Income"] - df["Expenses"]
+
+    st.write("Financial Data")
+    st.write(df)
+
+
+import plotly.express as px
+import pandas as pd
+
+
+with st.form("form3"):
+    income = st.number_input("Income")
+    expenses = st.number_input("Expenses")
+    submit = st.form_submit_button("Show Chart")
+
+if submit:
+    savings = income - expenses
+
+    data = {
+        "Category":["Income","Expenses","Savings"],
+        "Amount":[income,expenses,savings]
+    }
+
+    df = pd.DataFrame(data)
+
+    fig = px.bar(df, x="Category", y="Amount")
+
+    st.plotly_chart(fig)
+
+
+import matplotlib.pyplot as plt
+
+
+with st.form("form"):
+    income = st.number_input("Income")
+    expenses = st.number_input("Expenses")
+    submit = st.form_submit_button("Show Chart")
+
+if submit:
+    savings = income - expenses
+
+    labels = ["Income","Expenses","Savings"]
+    values = [income,expenses,savings]
+
+    fig, ax = plt.subplots()
+    ax.bar(labels, values)
+
+    st.pyplot(fig)
+
+
+
+
+from flask import Flask
+
+app = Flask(__name__)
+
+
+with st.form("form5"):
+    name = st.text_input("Enter Name")
+    age = st.number_input("Enter Age")
+    submit = st.form_submit_button("Submit")
+
+if submit:
+    st.write("Name:", name)
+    st.write("Age:", age)
+
+
