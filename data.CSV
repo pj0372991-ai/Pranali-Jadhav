@@ -1,0 +1,23 @@
+import plotly.express as px
+import pandas as pd
+
+
+with st.form("form3"):
+    income = st.number_input("Income")
+    expenses = st.number_input("Expenses")
+    submit = st.form_submit_button("Show Chart")
+
+if submit:
+    savings = income - expenses
+
+    data = {
+        "Category":["Income","Expenses","Savings"],
+        "Amount":[income,expenses,savings]
+    }
+  
+    df = pd.DataFrame(data)
+
+    fig = px.bar(df, x="Category", y="Amount")
+
+    st.plotly_chart(fig)
+
